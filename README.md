@@ -42,6 +42,7 @@ mcpml --help
 ```bash
 mcpml run
 ```
+mcpml.yaml is the default config file for the MCPML server.
 
 ```bash
 mcpml run --config https://github.com/a5c-ai/some-mcpml-server
