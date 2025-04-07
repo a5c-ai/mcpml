@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcpml"
+version = "0.1.0"
+description = "A Python framework for building MCP servers with CLI and OpenAI Agent support"
+authors = [
+    {name = "Tal Muskal", email = "tal@a5c.ai"}
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+dependencies = [
+    "fastapi>=0.95.0",
+    "uvicorn>=0.21.0",
+    "pydantic>=2.0.0",
+    "openai>=1.0.0",
+    "openai-agents>=0.0.1",
+    "typer>=0.9.0",
+    "python-dotenv>=1.0.0",
+    "PyYAML>=6.0.2",
+    "requests>=2.31.0",
+    "rich>=13.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.0.262",
+]
+
+[project.scripts]
+mcpml = "mcpml.cli.main:app"
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "B"]
+ignore = []
+target-version = "py38"

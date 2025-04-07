@@ -1,0 +1,58 @@
+name: "MCPML Example"
+settings:
+  server:
+    host: "0.0.0.0"
+    port: 8000
+    log_level: "INFO"
+  log_level: "DEBUG"  
+mcpServers:
+  - name: filesystem
+    command: npx
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
+    description: Filesystem access
+  - name: hackernews
+    command: uvx
+    args: ["mcp-hn"]
+    description: Hacker News access 
+tools:
+  # Function-based tools
+  - name: calculate
+    type: function
+    description: Perform a calculation
+    implementation: custom_tools.math.calculate
+  # Agent-based tools
+  - name: summarize
+    type: agent
+    description: Summarize text content
+    agent_type: simple
+    instructions: "You are a summarization assistant. Provide concise summaries of the text provided by the user."
+    model: gpt-4o-mini
+    tools: []
+    mcp_servers: []
+
+  - name: research
+    type: agent
+    description: Research a topic using multiple sources
+    agent_type: simple
+    instructions: "You are a research assistant. Use the available tools to search for information on the topic in hacker news and compile a comprehensive report using the summarize tool."
+    model: gpt-4o
+    tools:
+      - summarize
+    mcp_servers: 
+      - hackernews
+
+  # Example of a tool with structured output schema
+  - name: analyze_sentiment
+    type: agent
+    description: Analyze the sentiment of text
+    agent_type: simple
+    instructions: "You are a sentiment analysis assistant. Analyze the sentiment of the text provided by the user. Be specific about positive and negative aspects."
+    model: gpt-4o-mini
+    output_schema: schemas.SentimentAnalysisOutput
+    tools: []
+    mcp_servers: []
+
+  - name: get_weather
+    type: function
+    description: Get current weather
+    implementation: custom_tools.weather.get_weather
