@@ -272,7 +272,7 @@ if default_config is not None:
                     )
                 )
             except (ImportError, AttributeError) as e:
-                logger.warning(f"Could not register tool {tool.name}: {e}")
+                # logger.warning(f"Could not register tool {tool.name}: {e}")
                 # Skip this tool but don't crash
                 continue
         else:
@@ -303,7 +303,7 @@ def run_server(
     """Run the MCP server"""
     config, config_dir = get_config_and_setup_env(config_source)
     
-    console.print(f"[green]Starting MCP server[/] with config: {config}")
+    # console.print(f"[green]Starting MCP server[/] with config: {config}")
     server = create_server(config)
     server.run(transport)
 

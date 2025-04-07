@@ -45,11 +45,18 @@ mcpml run
 mcpml.yaml is the default config file for the MCPML server.
 
 ```bash
-mcpml run --config https://github.com/a5c-ai/some-mcpml-server
+mcpml run -c https://github.com/a5c-ai/some-mcpml-server
 ```
 
 ```bash
-mcpml --config mcpml.yaml tools some-tool run --arg1 value1 --arg2 value2
+mcpml -c mcpml.yaml tools some-tool run --arg1 value1 --arg2 value2
+```
+
+using uvx:
+```bash
+uvx git+https://github.com/a5c-ai/mcpml#egg=mcpml -c mcpml.yaml tools list
+
+uvx git+https://github.com/a5c-ai/mcpml#egg=mcpml run --transport=sse
 ```
 
 ## License
