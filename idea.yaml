@@ -5,14 +5,7 @@
   "githubUrl": "https://github.com/a5c-ai/mcpml",
   "projectUrl": "https://github.com/a5c-ai/mcpml/projects",
   "azure": {
-    "deployUrl": "https://mcpml.azurewebsites.net",
-    "resources": [
-      "https://portal.azure.com/#@85f6b733-81c9-4249-b305-5fb7292db22b/resource/subscriptions/794e33cd-48ba-4654-8cd9-b6cf2715e097/resourceGroups/mcpml-rg/providers/Microsoft.Web/sites/mcpml-app/appServices",
-      "https://mcpml.scm.azurewebsites.net/api/deployments/latest",
-      "https://github.com/a5c-ai/mcpml/deployments/production"
-    ],
-    "resourceGroup": "mcpml-rg",
-    "webappName": "mcpml"
+    "deployUrl": "https://github.com/a5c-ai/mcpml/projects"
   },
   "tags": [ "open source", "mcp", "developer", "framework"]
 }
