@@ -29,7 +29,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="mcpml",
-    version="0.1.1",
+    version="0.1.2",
     description="A Python framework for building MCP servers with CLI and OpenAI Agent support",
     long_description=long_description,
     long_description_content_type="text/markdown",
