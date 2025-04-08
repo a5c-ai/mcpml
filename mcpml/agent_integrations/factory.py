@@ -41,9 +41,9 @@ def create_agent(
     mcp_servers = mcp_servers or []
     
     # First, try to load a custom agent type from the current working directory
-    custom_agent = _load_custom_agent_type(agent_type, instructions, model, output_type, **kwargs)
-    if custom_agent:
-        return custom_agent
+    # custom_agent = _load_custom_agent_type(agent_type, instructions, model, output_type, **kwargs)
+    # if custom_agent:
+    #     return custom_agent
     
     # If no custom agent was found, use the built-in types
     if agent_type == "simple":
