@@ -10,3 +10,5 @@ requests>=2.31.0
 rich>=13.3.0 
 FastMCP>=0.0.1
 mcp>=0.0.1
+uv>=0.1.0
+uvx>=0.1.0

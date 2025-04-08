@@ -86,7 +86,7 @@ def run_installation_scripts(repo_path: Path) -> None:
         else:
             # Make the script executable
             os.chmod(install_script, 0o755)
-            success = run_command(["bash", str(install_script)], cwd=repo_path)
+            success = run_command([ str(install_script)], cwd=repo_path)
         
         if not success:
             logger.warning(f"Failed to run installation script {install_script}")

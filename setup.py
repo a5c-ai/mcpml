@@ -13,6 +13,9 @@ requires = [
     "PyYAML>=6.0.2",
     "requests>=2.31.0",
     "rich>=13.3.0",
+    "uv>=0.1.0",
+    "uvx>=0.1.0",
+    "pip>=23.0.0",
 ]
 
 dev_requires = [
@@ -29,7 +32,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="mcpml",
-    version="0.1.2",
+    version="0.1.3",
     description="A Python framework for building MCP servers with CLI and OpenAI Agent support",
     long_description=long_description,
     long_description_content_type="text/markdown",
