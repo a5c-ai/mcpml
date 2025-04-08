@@ -54,9 +54,9 @@ mcpml -c mcpml.yaml tools some-tool run --arg1 value1 --arg2 value2
 
 using uvx:
 ```bash
-uvx git+https://github.com/a5c-ai/mcpml#egg=mcpml -c mcpml.yaml tools list
+uvx --from git+https://github.com/a5c-ai/mcpml#egg=mcpml mcpml -c mcpml.yaml tools list
 
-uvx git+https://github.com/a5c-ai/mcpml#egg=mcpml run --transport=sse
+uvx --from git+https://github.com/a5c-ai/mcpml#egg=mcpml mcpmp run --transport=sse
 ```
 
 ## License

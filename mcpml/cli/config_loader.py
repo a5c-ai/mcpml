@@ -48,6 +48,60 @@ def run_git_command(command: list[str], cwd: Optional[Path] = None) -> bool:
         logger.error(f"An unexpected error occurred while running git command '{' '.join(command)}': {e}")
         return False
 
+def run_command(command: list[str], cwd: Optional[Path] = None) -> bool:
+    """Runs a general command using subprocess."""
+    try:
+        process = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            check=True,
+            cwd=cwd,
+        )
+        logger.debug(f"Command '{' '.join(command)}' successful. Output:\n{process.stdout}")
+        return True
+    except FileNotFoundError:
+        logger.error(f"Error: '{command[0]}' command not found.")
+        return False
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Error running command '{' '.join(command)}':\n{e.stderr}")
+        return False
+    except Exception as e:
+        logger.error(f"An unexpected error occurred while running command '{' '.join(command)}': {e}")
+        return False
+
+def run_installation_scripts(repo_path: Path) -> None:
+    """Runs installation scripts and installs requirements if they exist."""
+    # Check for and run OS-specific installation script
+    install_script = None
+    if sys.platform.startswith('win'):
+        install_script = repo_path / "install-deps.cmd"
+    else:
+        install_script = repo_path / "install-deps.sh"
+    
+    if install_script.exists():
+        logger.info(f"Found installation script {install_script}. Running...")
+        if sys.platform.startswith('win'):
+            success = run_command([str(install_script)], cwd=repo_path)
+        else:
+            # Make the script executable
+            os.chmod(install_script, 0o755)
+            success = run_command(["bash", str(install_script)], cwd=repo_path)
+        
+        if not success:
+            logger.warning(f"Failed to run installation script {install_script}")
+        else:
+            logger.info(f"Installation script {install_script} completed successfully")
+    
+    # Check for and install requirements.txt
+    requirements_file = repo_path / "requirements.txt"
+    if requirements_file.exists():
+        logger.info(f"Found requirements.txt. Installing dependencies...")
+        success = run_command([sys.executable, "-m", "pip", "install", "-r", str(requirements_file)], cwd=repo_path)
+        if not success:
+            logger.warning("Failed to install requirements")
+        else:
+            logger.info("Requirements installed successfully")
 
 def resolve_remote_config(source: str) -> Path:
     """
@@ -73,10 +127,15 @@ def resolve_remote_config(source: str) -> Path:
             logger.info(f"Repository exists at {local_repo_path}. Attempting to update...")
             if not run_git_command(["pull"], cwd=local_repo_path):
                 logger.warning(f"Failed to update repository {local_repo_path}. Using cached version.")
+            else:
+                # Run installation scripts after successful update
+                run_installation_scripts(local_repo_path)
         else:
             logger.info(f"Cloning repository {repo_url} to {local_repo_path}...")
             if not run_git_command(["clone", repo_url, str(local_repo_path)]):
                 raise RuntimeError(f"Failed to clone repository: {repo_url}")
+            # Run installation scripts after successful clone
+            run_installation_scripts(local_repo_path)
 
         return local_repo_path
     else:
