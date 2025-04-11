@@ -147,11 +147,12 @@ class MCPOpenAIAgent(MCPAgent):
             tool_function = invoke_agent
         self.tools.append(tool_function)
     
-    async def run_async(self, **kwargs) -> Any:
+    async def run_async(self, max_turns:int=10, **kwargs) -> Any:
         """
         Run the agent with a query asynchronously
         
         Args:
+            max_turns: The maximum number of turns the agent can take
             **kwargs: The user query to process
             
         Returns:
@@ -182,6 +183,7 @@ class MCPOpenAIAgent(MCPAgent):
             # Run the agent
             result = await Runner.run(agent,
                                       run_config=RunConfig(model_provider=CustomModelProvider()),
+                                      max_turns=max_turns,
                                       **kwargs)
             
             # Return the final output
@@ -195,12 +197,13 @@ class MCPOpenAIAgent(MCPAgent):
             logger.exception("Error running OpenAI agent")
             return f"Error: {str(e)}"
 
-    def run(self, **kwargs) -> Any:
+    def run(self, max_turns:int=10, **kwargs) -> Any:
         """
         Run the agent with a query
         
         Args:
-            query: The user query to process
+            **kwargs: The user query to process
+            max_turns: The maximum number of turns the agent can take
             
         Returns:
             The result of processing the query

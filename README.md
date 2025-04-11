@@ -5,7 +5,7 @@ A Python framework for building [Model Context Protocol (MCP)](https://github.co
 ## Features
 
 - 🚀 **MCP Server Framework**: Build MCP-compliant servers in Python
-- 🔧 **CLI Tools**: All server capabilities exposed as CLI commands
+- 🔧 **CLI Tools**: All server capabilities exposed as CLI commands (to be consumed by humans or scripts rather than MCP clients)
 - 🤖 **OpenAI Agent SDK Support**: Implement tools as OpenAI agents Or as simple python functions
 - 🔄 **Agent-to-MCP Integration**: Agents can consume MCP services via config
 - 🛠️ **Extensible Architecture**: Easily add custom tools and services

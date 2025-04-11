@@ -79,6 +79,8 @@ class ToolDefinition(BaseModel):
     output_schema: Optional[str] = None
     mcp_servers: Optional[List[str]] = None
     tools: Optional[List[str]] = None
+    max_turns: Optional[int] = None
+
 
 def load_mcpml_config(config_path: str) -> Optional[MCPMLConfig]:
     if not os.path.exists(config_path):

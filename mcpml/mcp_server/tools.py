@@ -119,6 +119,8 @@ def execute_tool(tool_name: str, **kwargs) -> Any:
             tools = [t.name for t in tools if t.name in tool.tools]
         else:
             tools = []
+        if tool.max_turns is not None:
+            kwargs["max_turns"] = tool.max_turns
         agent = create_agent(agent_type=tool.agent_type, model=tool.model, instructions=tool.instructions, mcp_servers=mcp_servers,tools=tools)
         result = agent.run(**kwargs)
         return result
