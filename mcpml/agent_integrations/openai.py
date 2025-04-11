@@ -208,7 +208,7 @@ class MCPOpenAIAgent(MCPAgent):
         Returns:
             The result of processing the query
         """
-        return asyncio.run(self.run_async(**kwargs))
+        return asyncio.run(self.run_async(max_turns=max_turns,**kwargs))
 
     def _execute_tool(self, tool_name: str, arguments: Dict[str, Any]) -> Any:
         """
