@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mcpml"
-version = "0.1.5"
+version = "0.1.6"
 description = "A Python framework for building MCP servers with CLI and OpenAI Agent support"
 authors = [
     {name = "Tal Muskal", email = "tal@a5c.ai"}

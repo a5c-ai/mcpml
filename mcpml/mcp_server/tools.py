@@ -7,6 +7,8 @@ import json
 import logging
 import os
 import sys
+import asyncio
+import inspect
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Type, Union
 
@@ -80,9 +82,13 @@ def execute_tool(tool_name: str, **kwargs) -> Any:
         # Get function
         func = getattr(module, function_name)
         
-
         # Execute function
-        result = func(**kwargs)
+        if inspect.iscoroutinefunction(func):
+            # Handle async function
+            result = asyncio.run(func(**kwargs))
+        else:
+            # Handle synchronous function
+            result = func(**kwargs)
         
         # Handle output schema if specified
         if tool.output_schema:
