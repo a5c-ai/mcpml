@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/a5c-ai-mcpml-badge.png)](https://mseep.ai/app/a5c-ai-mcpml)
+
 # MCP Server Markup Language (MCPML)
 
 A Python framework for building [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol/docs) servers with CLI and OpenAI Agent support.
